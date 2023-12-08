@@ -4,7 +4,7 @@ import {Stargazer} from '../../models/interface';
 interface StargazersListState {
   value: Stargazer[];
   loading: boolean;
-  error: Error | null;
+  error: string | null;
 }
 
 const initialState: StargazersListState = {
@@ -26,7 +26,7 @@ export const stargazersListSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    setError: (state, action: PayloadAction<Error>) => {
+    setError: (state, action: PayloadAction<any>) => {
       state.loading = false;
       state.error = action.payload;
     },

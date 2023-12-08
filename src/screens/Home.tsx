@@ -1,22 +1,25 @@
 import React, {useState} from 'react';
 import {View, Text, FlatList, Image, TextInput, Button} from 'react-native';
-import {Repository} from '../models/interface';
+import {Repository, Stargazer} from '../models/interface';
 import useStargazers from '../hooks/useStargazers';
+import {useSelector} from 'react-redux';
+import {RootState} from '@reduxjs/toolkit/query';
 
 interface Props {}
 
 const StargazersList: React.FC<Props> = () => {
   const [owner, setOwner] = useState('doublesymmetry');
   const [repo, setRepo] = useState('react-native-track-player');
-
-  const {stargazers, fetchStargazers} = useStargazers();
+  const stargazersList = useSelector((state: any) => {
+    return state.stargazersList.value;
+  });
+  const {fetchStargazers} = useStargazers();
 
   const handleFetchStargazers = () => {
     const repository: Repository = {
       owner: owner,
       name: repo,
     };
-
     fetchStargazers(repository);
   };
 
@@ -42,10 +45,10 @@ const StargazersList: React.FC<Props> = () => {
           style={{flex: 1, height: 40, borderColor: 'gray', borderWidth: 1}}
         />
       </View>
-      <Button title="Visualizza Stargazersss" onPress={handleFetchStargazers} />
-      {stargazers.length > 0 && (
+      <Button title="Visualizza Stargazers" onPress={handleFetchStargazers} />
+      {stargazersList.length > 0 && (
         <FlatList
-          data={stargazers}
+          data={stargazersList}
           keyExtractor={item => item.login}
           renderItem={({item}) => (
             <View>

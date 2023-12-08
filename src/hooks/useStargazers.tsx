@@ -1,11 +1,14 @@
-import {useState} from 'react';
 import {Repository, Stargazer} from '../models/interface';
 import {axiosInstance} from '../services/api';
 import {AxiosResponse} from 'axios';
+import {useDispatch} from 'react-redux';
+import {
+  setError,
+  setLoading,
+  setStargazers,
+} from '../store/reducers/stargazersSlice';
 
 interface UseStargazersProps {
-  stargazers: Stargazer[];
-  loading: boolean;
   fetchStargazers: (repository: Repository) => Promise<void>;
 }
 
@@ -15,9 +18,7 @@ interface UseStargazersProps {
  * @returns stargazers fetched, loading state and error.
  */
 const useStargazers = (): UseStargazersProps => {
-  const [stargazers, setStargazers] = useState<Stargazer[]>([]);
-  const [loading, setLoading] = useState(false);
-
+  const dispatch = useDispatch();
   /**
    * get request in order to retrieve list of stargazers.
    *
@@ -40,17 +41,17 @@ const useStargazers = (): UseStargazersProps => {
 
   const fetchStargazers = async (repository: Repository) => {
     try {
-      setLoading(true);
+      dispatch(setLoading());
       const response = await getStargazers(repository);
-      setStargazers(response);
+      dispatch(setStargazers(response));
     } catch (error) {
+      dispatch(setError(error));
       console.log('Fetch Stargazers error: ', error);
     } finally {
-      setLoading(false);
     }
   };
 
-  return {stargazers, loading, fetchStargazers};
+  return {fetchStargazers};
 };
 
 export default useStargazers;
