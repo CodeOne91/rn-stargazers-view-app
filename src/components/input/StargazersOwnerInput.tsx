@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Input} from 'native-base';
+import {View, Input, Flex} from 'native-base';
 
 interface StargazersOwnerInputProps {
   owner: string;
@@ -11,14 +11,12 @@ const StargazersOwnerInput: React.FC<StargazersOwnerInputProps> = ({
   onChangeOwner,
 }) => {
   return (
-    <View style={{marginBottom: 10}}>
-      <Input
-        placeholder="Owner"
-        value={owner}
-        onChangeText={onChangeOwner}
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-      />
-    </View>
+    <Input
+      placeholder="Owner"
+      value={owner}
+      onChangeText={onChangeOwner}
+      style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+    />
   );
 };
 

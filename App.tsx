@@ -6,21 +6,24 @@
  */
 
 import React from 'react';
-import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
+import {SafeAreaView, StatusBar} from 'react-native';
 
-import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
+import {Header} from 'react-native/Libraries/NewAppScreen';
 import StargazersList from './src/screens/Home';
 import store from './src/store/store';
 import {Provider} from 'react-redux';
-import {NativeBaseProvider, Box} from 'native-base';
+import {extendTheme, NativeBaseProvider} from 'native-base';
 
 function App(): JSX.Element {
+  const config = {
+    useSystemColorMode: true,
+  };
+
+  const extendedTheme = extendTheme({config});
   return (
     <Provider store={store}>
-      <NativeBaseProvider>
-        <SafeAreaView>
-          <StatusBar />
-          <Header />
+      <NativeBaseProvider theme={extendedTheme}>
+        <SafeAreaView style={{flex: 1}}>
           <StargazersList />
         </SafeAreaView>
       </NativeBaseProvider>

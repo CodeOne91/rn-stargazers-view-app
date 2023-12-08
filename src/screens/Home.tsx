@@ -7,6 +7,9 @@ import {useSelector} from 'react-redux';
 import StargazersOwnerInput from '../components/input/StargazersOwnerInput.tsx';
 import StargazersRepoInput from '../components/input/StargazersRepoInput.tsx';
 import StargazersButton from '../components/CTA/SubmitStargazersButton.tsx';
+import BasicScreenComponent from '../components/screen/BasicScreenComponent.tsx';
+import {VStack} from 'native-base';
+import StargazersFlatList from '../components/list/StargazersFlatList/StargazersFlatList.tsx';
 
 interface Props {}
 
@@ -27,38 +30,17 @@ const StargazersList: React.FC<Props> = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <StargazersOwnerInput owner={owner} onChangeOwner={setOwner} />
-      <StargazersRepoInput repo={repo} onChangeRepo={setRepo} />
-      <StargazersButton onPress={handleFetchStargazers} />
+    <BasicScreenComponent>
+      <VStack space={4} alignItems="center">
+        <StargazersOwnerInput owner={owner} onChangeOwner={setOwner} />
+        <StargazersRepoInput repo={repo} onChangeRepo={setRepo} />
+        <StargazersButton onPress={handleFetchStargazers} />
+      </VStack>
       {stargazersList.length > 0 && (
-        <FlatList
-          data={stargazersList}
-          keyExtractor={item => item.login}
-          renderItem={({item}) => (
-            <View style={styles.listItem}>
-              <Image
-                source={{uri: item.avatar_url}}
-                style={{width: 50, height: 50, borderRadius: 25}}
-              />
-              <Text>{item.login}</Text>
-            </View>
-          )}
-        />
+        <StargazersFlatList stargazersList={stargazersList} />
       )}
-    </View>
+    </BasicScreenComponent>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
-  listItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-});
 
 export default StargazersList;

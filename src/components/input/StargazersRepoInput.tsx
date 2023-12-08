@@ -11,14 +11,12 @@ const StargazersRepoInput: React.FC<StargazersRepoInputProps> = ({
   onChangeRepo,
 }) => {
   return (
-    <View style={{marginBottom: 10}}>
-      <Input
-        placeholder="Repository"
-        value={repo}
-        onChangeText={onChangeRepo}
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-      />
-    </View>
+    <Input
+      placeholder="Repository"
+      value={repo}
+      onChangeText={onChangeRepo}
+      style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+    />
   );
 };
 
