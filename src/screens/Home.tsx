@@ -1,18 +1,21 @@
 import React, {useState} from 'react';
-import {View, Text, FlatList, Image, TextInput, Button} from 'react-native';
-import {Repository, Stargazer} from '../models/interface';
+import {View, FlatList, Image, Text, StyleSheet} from 'react-native';
+
+import {Repository} from '../models/interface';
 import useStargazers from '../hooks/useStargazers';
 import {useSelector} from 'react-redux';
-import {RootState} from '@reduxjs/toolkit/query';
+import StargazersOwnerInput from '../components/input/StargazersOwnerInput.tsx';
+import StargazersRepoInput from '../components/input/StargazersRepoInput.tsx';
+import StargazersButton from '../components/CTA/SubmitStargazersButton.tsx';
 
 interface Props {}
 
 const StargazersList: React.FC<Props> = () => {
   const [owner, setOwner] = useState('doublesymmetry');
   const [repo, setRepo] = useState('react-native-track-player');
-  const stargazersList = useSelector((state: any) => {
-    return state.stargazersList.value;
-  });
+  const stargazersList = useSelector(
+    (state: any) => state.stargazersList.value,
+  );
   const {fetchStargazers} = useStargazers();
 
   const handleFetchStargazers = () => {
@@ -24,37 +27,19 @@ const StargazersList: React.FC<Props> = () => {
   };
 
   return (
-    <View>
-      <View style={{flexDirection: 'row', marginBottom: 10}}>
-        <TextInput
-          placeholder="Owner"
-          value={owner}
-          onChangeText={text => setOwner(text)}
-          style={{
-            flex: 1,
-            height: 40,
-            borderColor: 'gray',
-            borderWidth: 1,
-            marginRight: 10,
-          }}
-        />
-        <TextInput
-          placeholder="Repository"
-          value={repo}
-          onChangeText={text => setRepo(text)}
-          style={{flex: 1, height: 40, borderColor: 'gray', borderWidth: 1}}
-        />
-      </View>
-      <Button title="Visualizza Stargazers" onPress={handleFetchStargazers} />
+    <View style={styles.container}>
+      <StargazersOwnerInput owner={owner} onChangeOwner={setOwner} />
+      <StargazersRepoInput repo={repo} onChangeRepo={setRepo} />
+      <StargazersButton onPress={handleFetchStargazers} />
       {stargazersList.length > 0 && (
         <FlatList
           data={stargazersList}
           keyExtractor={item => item.login}
           renderItem={({item}) => (
-            <View>
+            <View style={styles.listItem}>
               <Image
                 source={{uri: item.avatar_url}}
-                style={{width: 50, height: 50}}
+                style={{width: 50, height: 50, borderRadius: 25}}
               />
               <Text>{item.login}</Text>
             </View>
@@ -64,5 +49,16 @@ const StargazersList: React.FC<Props> = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+  },
+  listItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+});
 
 export default StargazersList;

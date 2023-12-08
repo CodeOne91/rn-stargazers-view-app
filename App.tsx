@@ -12,24 +12,18 @@ import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 import StargazersList from './src/screens/Home';
 import store from './src/store/store';
 import {Provider} from 'react-redux';
+import {NativeBaseProvider, Box} from 'native-base';
 
 function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
     <Provider store={store}>
-      <SafeAreaView style={backgroundStyle}>
-        <StatusBar
-          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-          backgroundColor={backgroundStyle.backgroundColor}
-        />
-        <Header />
-        <StargazersList />
-      </SafeAreaView>
+      <NativeBaseProvider>
+        <SafeAreaView>
+          <StatusBar />
+          <Header />
+          <StargazersList />
+        </SafeAreaView>
+      </NativeBaseProvider>
     </Provider>
   );
 }
