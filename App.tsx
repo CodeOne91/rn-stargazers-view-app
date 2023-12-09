@@ -6,9 +6,6 @@
  */
 
 import React, {useEffect} from 'react';
-import {SafeAreaView} from 'react-native';
-
-import StargazersList from './src/screens/Home';
 import store from './src/store/store';
 import {Provider, useDispatch, useSelector} from 'react-redux';
 import {PaperProvider} from 'react-native-paper';
@@ -17,6 +14,7 @@ import {toggleTheme} from './src/store/reducers/isThemeDarkSlice.ts';
 import {darkTheme, lightTheme} from './src/style/theme/theme';
 import {NavigationContainer} from '@react-navigation/native';
 import MainNavigator from './src/navigation/StackNavigator.tsx';
+import SnackbarBasic from './src/components/snackbar/SnackbarBasic.tsx';
 
 function App(): JSX.Element {
   return (
@@ -46,6 +44,7 @@ function AppContainer(): JSX.Element {
     <PaperProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <NavigationContainer>
         <MainNavigator />
+        <SnackbarBasic />
       </NavigationContainer>
     </PaperProvider>
   );

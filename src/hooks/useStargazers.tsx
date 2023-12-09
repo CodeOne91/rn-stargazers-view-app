@@ -7,6 +7,7 @@ import {
   setLoading,
   setStargazers,
 } from '../store/reducers/stargazersSlice';
+import {showSnackbar} from '../store/reducers/SnackbarContextSlice.ts';
 
 interface UseStargazersProps {
   fetchStargazers: (repository: Repository) => Promise<void>;
@@ -34,7 +35,6 @@ const useStargazers = (): UseStargazersProps => {
       );
       return response.data;
     } catch (error) {
-      console.error('Error fetching stargazers:', error);
       throw error;
     }
   };
@@ -46,7 +46,7 @@ const useStargazers = (): UseStargazersProps => {
       dispatch(setStargazers(response));
     } catch (error) {
       dispatch(setError(error));
-      console.log('Fetch Stargazers error: ', error);
+      dispatch(showSnackbar('An error occurred: ' + error));
     } finally {
     }
   };

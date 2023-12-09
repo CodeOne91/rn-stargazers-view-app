@@ -13,7 +13,6 @@ const OfflineScreen: React.FC = () => {
   const getNetInfo = () => {
     // To get the network state once
     NetInfo.fetch().then(state => {
-      console.log(state);
       if (state.isConnected) {
         navigation.navigate(HOME_SCREEN);
       }
