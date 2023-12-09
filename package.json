@@ -10,9 +10,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "@jest/types": "^29.6.3",
     "@reduxjs/toolkit": "^2.0.1",
     "@types/react-native": "^0.72.8",
     "axios": "^1.6.2",
+    "metro-react-native-babel-preset": "^0.77.0",
     "native-base": "^3.4.28",
     "react": "18.2.0",
     "react-native": "0.73.0",
