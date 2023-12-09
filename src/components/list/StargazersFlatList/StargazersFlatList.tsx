@@ -1,6 +1,6 @@
 import React from 'react';
-import {FlatList, View} from 'react-native';
-import {Title} from 'react-native-paper';
+import {ScrollView, View} from 'react-native';
+import {List, Title} from 'react-native-paper';
 
 import {Stargazer} from '../../../models/interface.ts';
 import StargazerItem from './StargazersItem.tsx';
@@ -12,14 +12,16 @@ interface StargazersFlatListProps {
 const StargazersFlatList: React.FC<StargazersFlatListProps> = ({
   stargazersList,
 }) => (
-  <View>
-    <Title style={{padding: 16}}>Header</Title>
-    <FlatList
-      data={stargazersList}
-      renderItem={({item}) => <StargazerItem stargazer={item} />}
-      keyExtractor={item => item.login}
-    />
-  </View>
+  <ScrollView>
+    <View>
+      <Title style={{padding: 16}}>Header</Title>
+      <List.Section>
+        {stargazersList.map(item => (
+          <StargazerItem key={item.login} stargazer={item} />
+        ))}
+      </List.Section>
+    </View>
+  </ScrollView>
 );
 
 export default StargazersFlatList;
