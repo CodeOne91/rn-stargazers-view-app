@@ -25,12 +25,18 @@ axiosInstance.interceptors.response.use(
   },
   err => {
     switch (err.response.status) {
+      case 304:
+        console.log('304, Not Modified');
+        throw 'Not modified :' + err.message;
       case 400:
         console.log('Error 400, Bad Request');
         throw 'Bad request :' + err.message;
       case 401:
         console.log('Error 401, Not Authorized');
         throw 'Not Authorized :' + err.message;
+      case 403:
+        console.log('Error 401, Forbidden');
+        throw 'Forbidden :' + err.message;
       case 404:
         console.log('Error 404, Not Found');
         throw 'Not found :' + err.message;
