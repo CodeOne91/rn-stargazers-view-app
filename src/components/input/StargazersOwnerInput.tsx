@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Input, Flex} from 'native-base';
+import {TextInput} from 'react-native-paper';
 
 interface StargazersOwnerInputProps {
   owner: string;
@@ -11,7 +11,7 @@ const StargazersOwnerInput: React.FC<StargazersOwnerInputProps> = ({
   onChangeOwner,
 }) => {
   return (
-    <Input
+    <TextInput
       placeholder="Owner"
       value={owner}
       onChangeText={onChangeOwner}

@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {NativeBaseProvider} from 'native-base';
-import StargazerItem from './StargazersItem.tsx';
+import {Provider as PaperProvider} from 'react-native-paper'; // Import PaperProvider
 import {describe, expect, it} from '@jest/globals';
+import StargazerItem from './StargazersItem.tsx';
 
 describe('StargazerItem', () => {
   it('renders correctly', () => {
@@ -13,9 +13,9 @@ describe('StargazerItem', () => {
 
     const tree = renderer
       .create(
-        <NativeBaseProvider>
+        <PaperProvider>
           <StargazerItem stargazer={stargazer} />
-        </NativeBaseProvider>,
+        </PaperProvider>,
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

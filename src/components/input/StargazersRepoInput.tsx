@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Input} from 'native-base';
+import {TextInput} from 'react-native-paper';
 
 interface StargazersRepoInputProps {
   repo: string;
@@ -11,7 +11,7 @@ const StargazersRepoInput: React.FC<StargazersRepoInputProps> = ({
   onChangeRepo,
 }) => {
   return (
-    <Input
+    <TextInput
       placeholder="Repository"
       value={repo}
       onChangeText={onChangeRepo}

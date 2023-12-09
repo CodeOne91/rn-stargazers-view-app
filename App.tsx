@@ -6,27 +6,21 @@
  */
 
 import React from 'react';
-import {SafeAreaView, StatusBar} from 'react-native';
+import {SafeAreaView} from 'react-native';
 
-import {Header} from 'react-native/Libraries/NewAppScreen';
 import StargazersList from './src/screens/Home';
 import store from './src/store/store';
 import {Provider} from 'react-redux';
-import {extendTheme, NativeBaseProvider} from 'native-base';
+import {PaperProvider} from 'react-native-paper';
 
 function App(): JSX.Element {
-  const config = {
-    useSystemColorMode: true,
-  };
-
-  const extendedTheme = extendTheme({config});
   return (
     <Provider store={store}>
-      <NativeBaseProvider theme={extendedTheme}>
+      <PaperProvider>
         <SafeAreaView style={{flex: 1}}>
           <StargazersList />
         </SafeAreaView>
-      </NativeBaseProvider>
+      </PaperProvider>
     </Provider>
   );
 }

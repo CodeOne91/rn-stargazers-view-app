@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
-import {View, FlatList, Image, Text, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
+import {
+  Button,
+  TextInput,
+  Divider,
+  ActivityIndicator,
+} from 'react-native-paper';
 
 import {Repository} from '../models/interface';
 import useStargazers from '../hooks/useStargazers';
 import {useSelector} from 'react-redux';
-import StargazersOwnerInput from '../components/input/StargazersOwnerInput.tsx';
-import StargazersRepoInput from '../components/input/StargazersRepoInput.tsx';
-import StargazersButton from '../components/CTA/SubmitStargazersButton.tsx';
 import BasicScreenComponent from '../components/screen/BasicScreenComponent.tsx';
-import {VStack} from 'native-base';
 import StargazersFlatList from '../components/list/StargazersFlatList/StargazersFlatList.tsx';
 
 interface Props {}
@@ -19,6 +21,7 @@ const StargazersList: React.FC<Props> = () => {
   const stargazersList = useSelector(
     (state: any) => state.stargazersList.value,
   );
+  const isLoading = useSelector((state: any) => state.stargazersList.loading);
   const {fetchStargazers} = useStargazers();
 
   const handleFetchStargazers = () => {
@@ -31,16 +34,34 @@ const StargazersList: React.FC<Props> = () => {
 
   return (
     <BasicScreenComponent>
-      <VStack space={4} alignItems="center">
-        <StargazersOwnerInput owner={owner} onChangeOwner={setOwner} />
-        <StargazersRepoInput repo={repo} onChangeRepo={setRepo} />
-        <StargazersButton onPress={handleFetchStargazers} />
-      </VStack>
+      <TextInput
+        label="Owner"
+        value={owner}
+        onChangeText={setOwner}
+        style={styles.input}
+      />
+      <TextInput
+        label="Repository"
+        value={repo}
+        onChangeText={setRepo}
+        style={styles.input}
+      />
+      <Button mode="contained" onPress={handleFetchStargazers}>
+        Fetch Stargazers
+      </Button>
+      {isLoading && <ActivityIndicator animating={true} />}
+      <Divider />
       {stargazersList.length > 0 && (
         <StargazersFlatList stargazersList={stargazersList} />
       )}
     </BasicScreenComponent>
   );
 };
+
+const styles = StyleSheet.create({
+  input: {
+    marginBottom: 12,
+  },
+});
 
 export default StargazersList;

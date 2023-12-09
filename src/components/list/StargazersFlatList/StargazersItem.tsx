@@ -1,6 +1,7 @@
-// StargazerItem.tsx
 import React from 'react';
-import {Box, HStack, VStack, Avatar, Text, Spacer} from 'native-base';
+import {View} from 'react-native';
+import {Avatar, Text, Divider} from 'react-native-paper';
+
 import {Stargazer} from '../../../models/interface.ts';
 
 interface StargazerItemProps {
@@ -8,15 +9,20 @@ interface StargazerItemProps {
 }
 
 const StargazerItem: React.FC<StargazerItemProps> = ({stargazer}) => (
-  <Box borderBottomWidth="1">
-    <HStack space={[2, 3]} justifyContent="space-between">
-      <Avatar size="48px" source={{uri: stargazer.avatar_url}} />
-      <VStack>
-        <Text bold>{stargazer.login}</Text>
-      </VStack>
-      <Spacer />
-    </HStack>
-  </Box>
+  <View style={{borderBottomWidth: 1}}>
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding: 8,
+      }}>
+      <Avatar.Image size={48} source={{uri: stargazer.avatar_url}} />
+      <View style={{flex: 1, marginLeft: 8, justifyContent: 'center'}}>
+        <Text style={{fontWeight: 'bold'}}>{stargazer.login}</Text>
+      </View>
+    </View>
+    <Divider />
+  </View>
 );
 
 export default StargazerItem;

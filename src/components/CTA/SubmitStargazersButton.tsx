@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Text} from 'native-base';
+import {Button, Text} from 'react-native-paper';
 
 interface StargazersButtonProps {
   onPress: () => void;
