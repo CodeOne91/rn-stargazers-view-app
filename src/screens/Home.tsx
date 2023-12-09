@@ -16,12 +16,11 @@ import StargazersFlatList from '../components/list/StargazersFlatList/Stargazers
 interface Props {}
 
 const StargazersList: React.FC<Props> = () => {
-  const [owner, setOwner] = useState('doublesymmetry');
-  const [repo, setRepo] = useState('react-native-track-player');
+  const [owner, setOwner] = useState('pagopa');
+  const [repo, setRepo] = useState('io-app');
   const stargazersList = useSelector(
     (state: any) => state.stargazersList.value,
   );
-  const isLoading = useSelector((state: any) => state.stargazersList.loading);
   const {fetchStargazers} = useStargazers();
 
   const handleFetchStargazers = () => {
@@ -49,7 +48,7 @@ const StargazersList: React.FC<Props> = () => {
       <Button mode="contained" onPress={handleFetchStargazers}>
         Fetch Stargazers
       </Button>
-      {isLoading && <ActivityIndicator animating={true} />}
+      {/*{isLoading && <ActivityIndicator animating={true} />}*/}
       <Divider />
       {stargazersList.length > 0 && (
         <StargazersFlatList stargazersList={stargazersList} />
