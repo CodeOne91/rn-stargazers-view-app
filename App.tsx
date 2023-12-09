@@ -15,6 +15,8 @@ import {PaperProvider} from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {toggleTheme} from './src/store/reducers/isThemeDarkSlice.ts';
 import {darkTheme, lightTheme} from './src/style/theme/theme';
+import {NavigationContainer} from '@react-navigation/native';
+import MainNavigator from './src/navigation/StackNavigator.tsx';
 
 function App(): JSX.Element {
   return (
@@ -42,9 +44,9 @@ function AppContainer(): JSX.Element {
 
   return (
     <PaperProvider theme={isDarkMode ? darkTheme : lightTheme}>
-      <SafeAreaView style={{flex: 1}}>
-        <StargazersList />
-      </SafeAreaView>
+      <NavigationContainer>
+        <MainNavigator />
+      </NavigationContainer>
     </PaperProvider>
   );
 }

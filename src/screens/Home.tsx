@@ -4,7 +4,7 @@ import StargazersContainer from '../container/StargazersContainer.tsx';
 
 interface Props {}
 
-const StargazersList: React.FC<Props> = () => {
+const HomeScreen: React.FC<Props> = () => {
   return (
     <BasicScreenComponent>
       <StargazersContainer />
@@ -12,4 +12,4 @@ const StargazersList: React.FC<Props> = () => {
   );
 };
 
-export default StargazersList;
+export default HomeScreen;

@@ -1,5 +1,6 @@
 import React, {ReactNode} from 'react';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import {useTheme} from 'react-native-paper';
 
 interface BasicScreenComponentProps {
   children: ReactNode;
@@ -8,7 +9,35 @@ interface BasicScreenComponentProps {
 const BasicScreenComponent: React.FC<BasicScreenComponentProps> = ({
   children,
 }) => {
-  return <View style={{padding: 10}}>{children}</View>;
+  const theme = useTheme();
+
+  return (
+    <View
+      style={[styles.container, {backgroundColor: theme.colors.background}]}>
+      {children}
+    </View>
+  );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 20,
+  },
+  icon: {
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 16,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+});
 
 export default BasicScreenComponent;
