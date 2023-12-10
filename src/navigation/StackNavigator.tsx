@@ -1,11 +1,17 @@
 import {useTheme} from 'react-native-paper';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {HOME_SCREEN, OFFLINE_SCREEN} from '../constants/route/route';
+import {
+  HOME_SCREEN,
+  OFFLINE_SCREEN,
+  SETTINGS_SCREEN,
+} from '../constants/route/route';
 import OfflineScreen from '../screens/OfflineScreen.tsx';
 import HomeScreen from '../screens/Home.tsx';
 import NetInfo from '@react-native-community/netinfo';
 import {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import SettingsScreen from '../screens/SettingsScreen.tsx';
+import MenuButton from '../components/menu/MenuComponent.tsx';
 
 const Stack = createNativeStackNavigator();
 
@@ -47,7 +53,14 @@ const MainNavigator = () => {
 
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name={HOME_SCREEN} component={HomeScreen} />
+      <Stack.Screen
+        name={HOME_SCREEN}
+        component={HomeScreen}
+        options={({navigation: any}) => ({
+          headerRight: () => <MenuButton navigation={navigation} />,
+        })}
+      />
+      <Stack.Screen name={SETTINGS_SCREEN} component={SettingsScreen} />
       <Stack.Screen name={OFFLINE_SCREEN} component={OfflineScreen} />
     </Stack.Navigator>
   );
