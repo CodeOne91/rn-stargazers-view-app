@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View, ActivityIndicator} from 'react-native';
 import {Button, TextInput, Divider} from 'react-native-paper';
 
 import {Repository} from '../models/interface';
@@ -29,34 +29,43 @@ const StargazersContainer: React.FC<Props> = () => {
   };
 
   return (
-    <>
-      <TextInput
-        label={t('common:owner')}
-        placeholder={t('common:ownerPlaceholder')}
-        value={owner}
-        onChangeText={setOwner}
-        style={styles.input}
-      />
-      <TextInput
-        label={t('common:repository')}
-        placeholder={t('common:repositoryPlaceholder')}
-        value={repo}
-        onChangeText={setRepo}
-        style={styles.input}
-      />
-      <Button mode="contained" onPress={handleFetchStargazers}>
-        {t('common:search')}
-      </Button>
-      {/*{isLoading && <ActivityIndicator animating={true} />}*/}
+    <View style={styles.container}>
+      <View style={styles.inputContainer}>
+        <TextInput
+          label={t('common:owner')}
+          placeholder={t('common:ownerPlaceholder')}
+          value={owner}
+          onChangeText={setOwner}
+          style={styles.input}
+        />
+        <TextInput
+          label={t('common:repository')}
+          placeholder={t('common:repositoryPlaceholder')}
+          value={repo}
+          onChangeText={setRepo}
+          style={styles.input}
+        />
+        <Button mode="contained" onPress={handleFetchStargazers}>
+          {t('common:search')}
+        </Button>
+      </View>
       <Divider />
       {stargazersList.length > 0 && (
         <StargazersFlatList stargazersList={stargazersList} />
       )}
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    marginTop: 10,
+    flex: 1,
+    justifyContent: 'center',
+  },
+  inputContainer: {
+    marginBottom: 12,
+  },
   input: {
     marginBottom: 12,
   },

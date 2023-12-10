@@ -4,6 +4,7 @@ import {List, Title} from 'react-native-paper';
 
 import {Stargazer} from '../../../models/interface.ts';
 import StargazerItem from './StargazersItem.tsx';
+import {useTranslation} from 'react-i18next';
 
 interface StargazersFlatListProps {
   stargazersList: Stargazer[];
@@ -11,17 +12,23 @@ interface StargazersFlatListProps {
 
 const StargazersFlatList: React.FC<StargazersFlatListProps> = ({
   stargazersList,
-}) => (
-  <ScrollView>
-    <View>
-      <Title style={{padding: 16}}>Header</Title>
-      <List.Section>
-        {stargazersList.map(item => (
-          <StargazerItem key={item.login} stargazer={item} />
-        ))}
-      </List.Section>
-    </View>
-  </ScrollView>
-);
+}) => {
+  const {t} = useTranslation();
+
+  return (
+    <ScrollView>
+      <View>
+        <Title style={{padding: 16, alignSelf: 'center'}}>
+          {t('common:stargazersListTitle')}
+        </Title>
+        <List.Section>
+          {stargazersList.map(item => (
+            <StargazerItem key={item.login} stargazer={item} />
+          ))}
+        </List.Section>
+      </View>
+    </ScrollView>
+  );
+};
 
 export default StargazersFlatList;

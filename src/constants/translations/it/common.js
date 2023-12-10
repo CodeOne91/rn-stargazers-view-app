@@ -9,4 +9,5 @@ export default {
   repository: 'Repository',
   repositoryPlaceholder: 'Inserisci il nome del repository',
   settings: 'Impostazioni',
+  stargazersListTitle: 'Elementi trovati',
 };
