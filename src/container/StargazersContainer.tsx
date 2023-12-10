@@ -49,7 +49,6 @@ const StargazersContainer: React.FC<Props> = () => {
           {t('common:search')}
         </Button>
       </View>
-      <Divider />
       {stargazersList.length > 0 && (
         <StargazersFlatList stargazersList={stargazersList} />
       )}

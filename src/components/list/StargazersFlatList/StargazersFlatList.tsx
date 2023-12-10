@@ -18,7 +18,7 @@ const StargazersFlatList: React.FC<StargazersFlatListProps> = ({
   return (
     <ScrollView>
       <View>
-        <Title style={{padding: 16, alignSelf: 'center'}}>
+        <Title style={{alignSelf: 'center', padding: 16}}>
           {t('common:stargazersListTitle')}
         </Title>
         <List.Section>
