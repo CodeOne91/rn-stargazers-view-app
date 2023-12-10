@@ -10,4 +10,8 @@ export default {
   repositoryPlaceholder: 'Inserisci il nome del repository',
   settings: 'Impostazioni',
   stargazersListTitle: 'Elementi trovati',
+  noInternetTitle: 'Nessuna connessione a internet',
+  checkYourConnection:
+    'Alcune funzionalità potrebbero essere limitate. Controlla la tua connessione.',
+  retry: 'Riprova',
 };

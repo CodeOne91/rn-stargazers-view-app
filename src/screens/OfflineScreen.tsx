@@ -5,10 +5,12 @@ import NetInfo from '@react-native-community/netinfo';
 import {useNavigation} from '@react-navigation/native';
 import {HOME_SCREEN} from '../constants/route/route';
 import BasicScreenComponent from '../components/screen/BasicScreenComponent.tsx';
+import {useTranslation} from 'react-i18next';
 
 const OfflineScreen: React.FC = () => {
   const theme = useTheme();
   const navigation = useNavigation();
+  const {t} = useTranslation();
 
   const getNetInfo = () => {
     // To get the network state once
@@ -23,10 +25,10 @@ const OfflineScreen: React.FC = () => {
     <BasicScreenComponent>
       <View
         style={[styles.container, {backgroundColor: theme.colors.background}]}>
-        <Text style={styles.title}>NO INTERNET</Text>
-        <Text style={styles.subtitle}>CHECK YOUR DATA CONNECTION</Text>
+        <Text style={styles.title}>{t('common:noInternetTitle')}</Text>
+        <Text style={styles.subtitle}>{t('common:checkYourConnection')}</Text>
         <Button mode="contained" onPress={getNetInfo}>
-          RETRY
+          {t('common:retry')}
         </Button>
       </View>
     </BasicScreenComponent>
