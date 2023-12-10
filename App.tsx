@@ -15,6 +15,7 @@ import {darkTheme, lightTheme} from './src/style/theme/theme';
 import {NavigationContainer} from '@react-navigation/native';
 import MainNavigator from './src/navigation/StackNavigator.tsx';
 import SnackbarBasic from './src/components/snackbar/SnackbarBasic.tsx';
+import './src/components/translator/IMLocalize';
 
 function App(): JSX.Element {
   return (

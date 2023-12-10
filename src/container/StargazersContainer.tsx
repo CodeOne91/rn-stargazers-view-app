@@ -6,12 +6,15 @@ import {Repository} from '../models/interface';
 import useStargazers from '../hooks/useStargazers';
 import {useSelector} from 'react-redux';
 import StargazersFlatList from '../components/list/StargazersFlatList/StargazersFlatList.tsx';
+import {useTranslation} from 'react-i18next';
 
 interface Props {}
 
 const StargazersContainer: React.FC<Props> = () => {
   const [owner, setOwner] = useState('pagopa');
   const [repo, setRepo] = useState('io-app');
+  const {t} = useTranslation();
+
   const stargazersList = useSelector(
     (state: any) => state.stargazersList.value,
   );
@@ -28,19 +31,21 @@ const StargazersContainer: React.FC<Props> = () => {
   return (
     <>
       <TextInput
-        label="Owner"
+        label={t('common:owner')}
+        placeholder={t('common:ownerPlaceholder')}
         value={owner}
         onChangeText={setOwner}
         style={styles.input}
       />
       <TextInput
-        label="Repository"
+        label={t('common:repository')}
+        placeholder={t('common:repositoryPlaceholder')}
         value={repo}
         onChangeText={setRepo}
         style={styles.input}
       />
       <Button mode="contained" onPress={handleFetchStargazers}>
-        Fetch Stargazers
+        {t('common:search')}
       </Button>
       {/*{isLoading && <ActivityIndicator animating={true} />}*/}
       <Divider />

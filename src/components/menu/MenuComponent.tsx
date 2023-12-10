@@ -5,11 +5,13 @@ import {useNavigation} from '@react-navigation/native';
 // @ts-ignore
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {SETTINGS_SCREEN} from '../../constants/route/route';
+import {useTranslation} from 'react-i18next';
 
 const MenuButton = () => {
   const [visible, setVisible] = React.useState(false);
   const navigator = useNavigation();
   const theme = useTheme();
+  const {t} = useTranslation();
 
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
@@ -27,7 +29,7 @@ const MenuButton = () => {
         </TouchableOpacity>
       }>
       <Menu.Item
-        title={'Settings'}
+        title={t('common:settings')}
         leadingIcon={() => (
           <MaterialIcons
             name="settings"
