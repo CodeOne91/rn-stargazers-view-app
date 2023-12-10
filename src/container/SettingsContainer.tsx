@@ -41,10 +41,6 @@ const SettingsContainer: React.FC<Props> = () => {
   );
 };
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    position: 'relative',
-  },
   scrollView: {
     flex: 1,
     paddingHorizontal: 2,
@@ -54,17 +50,6 @@ const styles = StyleSheet.create({
     marginTop: 24,
     marginBottom: 8,
     fontSize: 16,
-  },
-  listItem: {
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-  },
-  listItemTitle: {
-    fontSize: 16,
-  },
-  listItemDescription: {
-    fontSize: 14,
-    marginTop: 4,
   },
 });
 export default SettingsContainer;
