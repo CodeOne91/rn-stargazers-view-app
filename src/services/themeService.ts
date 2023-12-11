@@ -7,7 +7,6 @@ export async function initializeTheme(
 ) {
   try {
     const value = await AsyncStorage.getItem('isDarkMode');
-    console.log('Theme is: ', value);
     const isDarkMode = value === 'true';
     dispatch(toggleTheme(isDarkMode));
   } catch (error) {}
