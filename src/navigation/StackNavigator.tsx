@@ -1,5 +1,8 @@
 import {useTheme} from 'react-native-paper';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+} from '@react-navigation/native-stack';
 import {
   HOME_SCREEN,
   OFFLINE_SCREEN,
@@ -9,15 +12,14 @@ import OfflineScreen from '../screens/OfflineScreen.tsx';
 import HomeScreen from '../screens/Home.tsx';
 import NetInfo from '@react-native-community/netinfo';
 import {useEffect} from 'react';
-import {useNavigation} from '@react-navigation/native';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
 import SettingsScreen from '../screens/SettingsScreen.tsx';
 import MenuButton from '../components/menu/MenuComponent.tsx';
-
 const Stack = createNativeStackNavigator();
 
 const MainNavigator = () => {
   const theme = useTheme();
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   const screenOptionStyle = {
     headerStyle: {
@@ -56,8 +58,8 @@ const MainNavigator = () => {
       <Stack.Screen
         name={HOME_SCREEN}
         component={HomeScreen}
-        options={({navigation: any}) => ({
-          headerRight: () => <MenuButton navigation={navigation} />,
+        options={() => ({
+          headerRight: () => <MenuButton />,
         })}
       />
       <Stack.Screen name={SETTINGS_SCREEN} component={SettingsScreen} />

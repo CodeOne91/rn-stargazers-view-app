@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, ActivityIndicator} from 'react-native';
-import {Button, TextInput, Divider} from 'react-native-paper';
+import {StyleSheet, View} from 'react-native';
+import {Button, TextInput} from 'react-native-paper';
 
 import {Repository} from '../models/interface';
 import useStargazers from '../hooks/useStargazers';
 import {useSelector} from 'react-redux';
-import StargazersFlatList from '../components/list/StargazersFlatList/StargazersFlatList.tsx';
 import {useTranslation} from 'react-i18next';
+import StargazersList from '../components/list/StargazersFlatList/StargazersList.tsx';
 
 interface Props {}
 
@@ -50,7 +50,7 @@ const StargazersContainer: React.FC<Props> = () => {
         </Button>
       </View>
       {stargazersList.length > 0 && (
-        <StargazersFlatList stargazersList={stargazersList} />
+        <StargazersList stargazersList={stargazersList} />
       )}
     </View>
   );

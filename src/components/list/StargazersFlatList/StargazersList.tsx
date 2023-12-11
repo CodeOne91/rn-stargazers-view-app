@@ -10,7 +10,7 @@ interface StargazersFlatListProps {
   stargazersList: Stargazer[];
 }
 
-const StargazersFlatList: React.FC<StargazersFlatListProps> = ({
+const StargazersList: React.FC<StargazersFlatListProps> = ({
   stargazersList,
 }) => {
   const {t} = useTranslation();
@@ -31,4 +31,4 @@ const StargazersFlatList: React.FC<StargazersFlatListProps> = ({
   );
 };
 
-export default StargazersFlatList;
+export default StargazersList;

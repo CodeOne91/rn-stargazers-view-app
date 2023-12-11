@@ -2,21 +2,22 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Button, Text, useTheme} from 'react-native-paper';
 import NetInfo from '@react-native-community/netinfo';
-import {useNavigation} from '@react-navigation/native';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {HOME_SCREEN} from '../constants/route/route';
 import BasicScreenComponent from '../components/screen/BasicScreenComponent.tsx';
 import {useTranslation} from 'react-i18next';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const OfflineScreen: React.FC = () => {
   const theme = useTheme();
-  const navigation = useNavigation();
+  const navigator = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   const {t} = useTranslation();
 
   const getNetInfo = () => {
     // To get the network state once
     NetInfo.fetch().then(state => {
       if (state.isConnected) {
-        navigation.navigate(HOME_SCREEN);
+        navigator.navigate(HOME_SCREEN);
       }
     });
   };
