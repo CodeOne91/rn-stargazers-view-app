@@ -1,6 +1,7 @@
 import {act} from 'react-test-renderer';
 import {renderHook} from '@testing-library/react-native';
 import useStargazers from '../useStargazers.tsx';
+import {Stargazer} from '../../models/interface.ts';
 
 // Mocking the useDispatch hook
 jest.mock('react-redux', () => ({
@@ -10,7 +11,7 @@ jest.mock('react-redux', () => ({
 }));
 
 describe('useStargazers', () => {
-  it('fetches stargazers and updates the state', async () => {
+  it('given a response from github API,dispatch action', async () => {
     const dispatchMock = jest.fn();
 
     // Mocking useDispatch to return the mock dispatch function
@@ -37,10 +38,14 @@ describe('useStargazers', () => {
       type: 'stargazersList/setLoading',
     });
 
+    // Assert that the dispatch function was called with the expected actions
+    expect(dispatchMock).toHaveBeenCalledWith({
+      type: 'stargazersList/setStargazers',
+      payload: expect.any(Array) as Stargazer[],
+    });
+
     // Clean up mocks after the test
     jest.clearAllMocks();
     //timeout need
   }, 10000);
-
-  // Add more tests as needed
 });
