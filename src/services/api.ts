@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, {AxiosError, AxiosResponse} from 'axios';
 import {BASE_GITHUB_URL} from '../constants/api/api';
 
 const baseHeaders = {
@@ -11,42 +11,46 @@ export const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.response.use(
-  response => {
+  (response: AxiosResponse) => {
+    // Handle successful responses
     switch (response.status) {
       case 200:
         console.log('200, Ok');
         break;
       case 201:
         console.log('201, Ok');
-
         break;
     }
     return response;
   },
-  err => {
-    switch (err.response.status) {
-      case 304:
-        console.log('304, Not Modified');
-        throw 'Not modified :' + err.message;
-      case 400:
-        console.log('Error 400, Bad Request');
-        throw 'Bad request :' + err.message;
-      case 401:
-        console.log('Error 401, Not Authorized');
-        throw 'Not Authorized :' + err.message;
-      case 403:
-        console.log('Error 401, Forbidden');
-        throw 'Forbidden :' + err.message;
-      case 404:
-        console.log('Error 404, Not Found');
-        throw 'Not found :' + err.message;
-      case 422:
-        console.log('Error 422, Field Not correct');
-        throw ' Data validation failed :' + err.message;
+  (error: AxiosError) => {
+    // Handle errors
+    if (error.response) {
+      const {status, data} = error.response;
 
-      default:
-        console.log('Generic Error');
-        throw ' Generic error :' + err.message;
+      switch (status) {
+        case 304:
+          console.log('304, Not Modified');
+          throw {status, message: 'Not modified: ' + data};
+        case 400:
+          console.log('Error 400, Bad Request');
+          throw {status, message: 'Bad request: ' + data};
+        case 401:
+          console.log('Error 401, Not Authorized');
+          throw {status, message: 'Not Authorized: ' + data};
+        case 403:
+          console.log('Error 401, Forbidden');
+          throw {status, message: 'Forbidden: ' + data};
+        case 404:
+          console.log('Error 404, Not Found');
+          throw {status, message: 'Not found: ' + data};
+        case 422:
+          console.log('Error 422, Field Not correct');
+          throw {status, message: 'Data validation failed: ' + data};
+        default:
+          console.log('Generic Error');
+          throw {status, message: 'Generic error: ' + data};
+      }
     }
   },
 );

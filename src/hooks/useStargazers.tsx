@@ -1,4 +1,4 @@
-import {Repository, Stargazer} from '../models/interface';
+import {ErrorMessage, Repository, Stargazer} from '../models/interface';
 import {axiosInstance} from '../services/api';
 import {AxiosResponse} from 'axios';
 import {useDispatch} from 'react-redux';
@@ -7,7 +7,7 @@ import {
   setLoading,
   setStargazers,
 } from '../store/reducers/stargazersSlice';
-import {showSnackbar} from '../store/reducers/SnackbarContextSlice.ts';
+import {showErrorSnackbar} from '../store/reducers/SnackbarContextSlice.ts';
 
 interface UseStargazersProps {
   fetchStargazers: (repository: Repository) => Promise<void>;
@@ -44,9 +44,9 @@ const useStargazers = (): UseStargazersProps => {
       dispatch(setLoading());
       const response = await getStargazers(repository);
       dispatch(setStargazers(response));
-    } catch (error) {
+    } catch (error: any) {
       dispatch(setError(error));
-      dispatch(showSnackbar('An error occurred: ' + error));
+      dispatch(showErrorSnackbar(error as ErrorMessage));
     } finally {
     }
   };

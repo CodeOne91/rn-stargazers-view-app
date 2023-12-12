@@ -23,3 +23,8 @@ export interface Repository {
   owner: string;
   name: string;
 }
+
+export interface ErrorMessage {
+  status: string;
+  message: string;
+}
