@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {toggleTheme} from '../store/reducers/isThemeDarkSlice.ts';
 import {useDispatch, useSelector} from 'react-redux';
-import {ScrollView, StatusBar, StyleSheet, Switch} from 'react-native';
-import {List, useTheme} from 'react-native-paper';
+import {ScrollView, StatusBar, StyleSheet} from 'react-native';
+import {List, useTheme, Switch} from 'react-native-paper';
 import LanguageSelectorModal from '../components/modal/LanguageSelectorModal.tsx';
 import {useTranslation} from 'react-i18next';
 

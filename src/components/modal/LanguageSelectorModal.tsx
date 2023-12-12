@@ -10,7 +10,7 @@ import {useTranslation} from 'react-i18next';
 import i18next from 'i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AVAILABLE_LANGUAGES} from '../../constants/translations/LanguagesAvailable';
-import {Button} from 'react-native-paper';
+import {Button, useTheme} from 'react-native-paper';
 
 interface LanguageSelectorModalProps {
   language: string;
@@ -24,6 +24,7 @@ const LanguageSelectorModal: React.FC<LanguageSelectorModalProps> = ({
   const [modalVisible, setModalVisible] = useState(false);
   const modalRef = useRef<View>(null);
   const {i18n} = useTranslation();
+  const theme = useTheme();
 
   useEffect(() => {
     try {
@@ -81,6 +82,7 @@ const LanguageSelectorModal: React.FC<LanguageSelectorModalProps> = ({
                   width: '80%',
                   borderRadius: 20,
                   alignItems: 'center',
+                  backgroundColor: theme.colors.background,
                 }}>
                 {AVAILABLE_LANGUAGES?.map(languageOption => (
                   <Button
@@ -96,7 +98,7 @@ const LanguageSelectorModal: React.FC<LanguageSelectorModalProps> = ({
           </TouchableWithoutFeedback>
         </Modal>
       </TouchableWithoutFeedback>
-      <Button onPress={openModal} labelStyle={{fontSize: 18}}>
+      <Button onPress={openModal}>
         {AVAILABLE_LANGUAGES.find(lng => lng.label === language)?.value}
       </Button>
     </View>

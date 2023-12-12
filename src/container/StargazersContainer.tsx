@@ -1,19 +1,25 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Button, TextInput} from 'react-native-paper';
+import {StyleSheet, View, Modal, Pressable} from 'react-native';
+import {Button, Text, useTheme} from 'react-native-paper';
 
 import {Repository} from '../models/interface';
 import useStargazers from '../hooks/useStargazers';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 import StargazersList from '../components/list/StargazersFlatList/StargazersList.tsx';
+import StargazersOwnerInput from '../components/input/StargazersOwnerInput.tsx';
+import StargazersRepoInput from '../components/input/StargazersRepoInput.tsx';
+import {clearStargazers} from '../store/reducers/stargazersSlice.ts';
 
 interface Props {}
 
 const StargazersContainer: React.FC<Props> = () => {
   const [owner, setOwner] = useState('pagopa');
   const [repo, setRepo] = useState('io-app');
+  const [modalVisible, setModalVisible] = useState(false);
   const {t} = useTranslation();
+  const theme = useTheme();
+  const dispatch = useDispatch();
 
   const stargazersList = useSelector(
     (state: any) => state.stargazersList.value,
@@ -31,26 +37,45 @@ const StargazersContainer: React.FC<Props> = () => {
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
-        <TextInput
-          label={t('common:owner')}
-          placeholder={t('common:ownerPlaceholder')}
-          value={owner}
-          onChangeText={setOwner}
-          style={styles.input}
-        />
-        <TextInput
-          label={t('common:repository')}
-          placeholder={t('common:repositoryPlaceholder')}
-          value={repo}
-          onChangeText={setRepo}
-          style={styles.input}
-        />
-        <Button mode="contained" onPress={handleFetchStargazers}>
+        <StargazersOwnerInput owner={owner} onChangeOwner={setOwner} />
+        <StargazersRepoInput repo={repo} onChangeRepo={setRepo} />
+        <Button
+          mode="contained"
+          onPress={() => {
+            handleFetchStargazers();
+            setModalVisible(true);
+          }}
+          style={styles.searchButton}
+          labelStyle={styles.searchButtonText}>
           {t('common:search')}
         </Button>
       </View>
       {stargazersList.length > 0 && (
-        <StargazersList stargazersList={stargazersList} />
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}>
+          <View
+            style={[
+              styles.modalContainer,
+              {backgroundColor: theme.colors.background},
+            ]}>
+            <View style={styles.modalContent}>
+              <StargazersList stargazersList={stargazersList} />
+              <Button
+                style={styles.closeButton}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                  dispatch(clearStargazers());
+                }}>
+                Close
+              </Button>
+            </View>
+          </View>
+        </Modal>
       )}
     </View>
   );
@@ -58,15 +83,34 @@ const StargazersContainer: React.FC<Props> = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
     flex: 1,
     justifyContent: 'center',
+    padding: 16,
   },
   inputContainer: {
-    marginBottom: 12,
+    marginBottom: 16,
   },
-  input: {
-    marginBottom: 12,
+  searchButton: {
+    marginTop: 16,
+  },
+  searchButtonText: {
+    fontSize: 16,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    width: '80%',
+    maxHeight: '80%',
+    padding: 20,
+    borderRadius: 10,
+    elevation: 5,
+  },
+  closeButton: {
+    marginTop: 10,
+    alignItems: 'center',
   },
 });
 

@@ -30,10 +30,15 @@ export const stargazersListSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    clearStargazers: state => {
+      state.value = [];
+      state.loading = false;
+      state.error = null;
+    },
   },
 });
 
-export const {setStargazers, setLoading, setError} =
+export const {setStargazers, setLoading, setError, clearStargazers} =
   stargazersListSlice.actions;
 
 export default stargazersListSlice.reducer;

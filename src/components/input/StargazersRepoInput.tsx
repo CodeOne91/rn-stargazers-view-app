@@ -1,5 +1,7 @@
 import React from 'react';
-import {TextInput} from 'react-native-paper';
+import {StyleSheet} from 'react-native';
+import {TextInput, useTheme} from 'react-native-paper';
+import {useTranslation} from 'react-i18next';
 
 interface StargazersRepoInputProps {
   repo: string;
@@ -10,14 +12,32 @@ const StargazersRepoInput: React.FC<StargazersRepoInputProps> = ({
   repo,
   onChangeRepo,
 }) => {
+  const {t} = useTranslation();
+  const theme = useTheme();
+
   return (
     <TextInput
-      placeholder="Repository"
+      label={t('common:repository')}
+      placeholder={t('common:repositoryPlaceholder')}
+      mode={'outlined'}
       value={repo}
       onChangeText={onChangeRepo}
-      style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+      style={[
+        styles.input,
+        {
+          backgroundColor: theme.colors.onPrimary,
+          borderColor: theme.colors.primary,
+        },
+      ]}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  input: {
+    marginBottom: 12,
+    borderRadius: 10,
+  },
+});
 
 export default StargazersRepoInput;

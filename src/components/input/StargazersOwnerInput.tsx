@@ -1,5 +1,7 @@
 import React from 'react';
-import {TextInput} from 'react-native-paper';
+import {StyleSheet} from 'react-native';
+import {TextInput, useTheme} from 'react-native-paper';
+import {useTranslation} from 'react-i18next';
 
 interface StargazersOwnerInputProps {
   owner: string;
@@ -10,14 +12,26 @@ const StargazersOwnerInput: React.FC<StargazersOwnerInputProps> = ({
   owner,
   onChangeOwner,
 }) => {
+  const {t} = useTranslation();
+  const theme = useTheme();
+
   return (
     <TextInput
-      placeholder="Owner"
+      label={t('common:owner')}
+      mode={'outlined'}
+      placeholder={t('common:ownerPlaceholder')}
       value={owner}
       onChangeText={onChangeOwner}
-      style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+      style={[styles.input, {backgroundColor: theme.colors.onPrimary}]}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  input: {
+    marginBottom: 12,
+    borderRadius: 10,
+  },
+});
 
 export default StargazersOwnerInput;
