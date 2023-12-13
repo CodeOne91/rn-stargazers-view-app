@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {toggleTheme} from '../store/reducers/isThemeDarkSlice.ts';
 import {useDispatch, useSelector} from 'react-redux';
 import {
@@ -24,16 +24,20 @@ const SettingsContainer: React.FC<Props> = () => {
 
   const isDarkMode = useSelector((state: any) => state.theme?.isDarkMode);
 
-  const handleLanguageChange = (newLanguage: string) => {
+  const handleLanguageChange = useCallback((newLanguage: string) => {
     setLanguage(newLanguage);
-  };
-  const toggleThemeSwitch = async (val: boolean) => {
-    dispatch(toggleTheme(val));
-  };
+  }, []);
 
-  const handlePressLinkedin = async () => {
+  const toggleThemeSwitch = useCallback(
+    async (val: boolean) => {
+      dispatch(toggleTheme(val));
+    },
+    [dispatch],
+  );
+
+  const handlePressLinkedin = useCallback(async () => {
     await Linking.openURL(LINKEDIN_LINK);
-  };
+  }, []);
 
   return (
     <>
