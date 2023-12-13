@@ -16,4 +16,10 @@ export default {
   retry: 'Riprova',
   error404: 'Nessun elemento trovato, prova a cambiare i parametri di ricerca',
   close: 'Chiudi',
+  homeTitle: 'Stargazers Viewer',
+  settingsTitle: 'Impostazioni',
+  offlineTitle: 'Sei offline',
+  language: 'Linguaggio',
+  credits: 'Credits',
+  salvatore: 'Salvatore Mulè',
 };

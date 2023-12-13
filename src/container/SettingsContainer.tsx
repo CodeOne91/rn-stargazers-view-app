@@ -1,10 +1,18 @@
 import React, {useState} from 'react';
 import {toggleTheme} from '../store/reducers/isThemeDarkSlice.ts';
 import {useDispatch, useSelector} from 'react-redux';
-import {ScrollView, StatusBar, StyleSheet} from 'react-native';
+import {
+  Image,
+  Linking,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import {List, useTheme, Switch} from 'react-native-paper';
 import LanguageSelectorModal from '../components/modal/LanguageSelectorModal.tsx';
 import {useTranslation} from 'react-i18next';
+import {LINKEDIN_LINK} from '../constants/socialLink';
 
 interface Props {}
 
@@ -21,6 +29,10 @@ const SettingsContainer: React.FC<Props> = () => {
   };
   const toggleThemeSwitch = async (val: boolean) => {
     dispatch(toggleTheme(val));
+  };
+
+  const handlePressLinkedin = async () => {
+    await Linking.openURL(LINKEDIN_LINK);
   };
 
   return (
@@ -41,6 +53,10 @@ const SettingsContainer: React.FC<Props> = () => {
               />
             )}
           />
+          <List.Subheader
+            style={[styles.subheader, {color: theme.colors.secondary}]}>
+            {t('common:language')}
+          </List.Subheader>
           <List.Item
             title={t('common:selectALanguage')}
             right={() => (
@@ -50,6 +66,21 @@ const SettingsContainer: React.FC<Props> = () => {
               />
             )}
           />
+          <List.Subheader
+            style={[styles.subheader, {color: theme.colors.secondary}]}>
+            {t('common:credits')}
+          </List.Subheader>
+          <TouchableOpacity onPress={handlePressLinkedin}>
+            <List.Item
+              title={t('common:salvatore')}
+              right={() => (
+                <Image
+                  style={styles.image}
+                  source={require('../assets/logo/linkedin-logo.png')}
+                />
+              )}
+            />
+          </TouchableOpacity>
         </List.Section>
       </ScrollView>
     </>
@@ -65,6 +96,11 @@ const styles = StyleSheet.create({
     marginTop: 24,
     marginBottom: 8,
     fontSize: 16,
+  },
+  image: {
+    width: 35,
+    height: 35,
+    resizeMode: 'contain',
   },
 });
 export default SettingsContainer;

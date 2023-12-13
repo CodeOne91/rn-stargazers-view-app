@@ -15,12 +15,13 @@ import {useEffect} from 'react';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import SettingsScreen from '../screens/SettingsScreen.tsx';
 import MenuButton from '../components/menu/MenuComponent.tsx';
+import {useTranslation} from 'react-i18next';
 const Stack = createNativeStackNavigator();
 
 const MainNavigator = () => {
   const theme = useTheme();
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-
+  const {t} = useTranslation();
   const screenOptionStyle = {
     headerStyle: {
       backgroundColor: theme.colors.background,
@@ -59,11 +60,26 @@ const MainNavigator = () => {
         name={HOME_SCREEN}
         component={HomeScreen}
         options={() => ({
+          title: t('common:homeTitle'),
+          headerBackVisible: false,
+          headerShadowVisible: false,
           headerRight: () => <MenuButton />,
         })}
       />
-      <Stack.Screen name={SETTINGS_SCREEN} component={SettingsScreen} />
-      <Stack.Screen name={OFFLINE_SCREEN} component={OfflineScreen} />
+      <Stack.Screen
+        name={SETTINGS_SCREEN}
+        component={SettingsScreen}
+        options={{
+          title: t('common:settingsTitle'),
+        }}
+      />
+      <Stack.Screen
+        name={OFFLINE_SCREEN}
+        component={OfflineScreen}
+        options={{
+          title: t('common:offlineTitle'),
+        }}
+      />
     </Stack.Navigator>
   );
 };
