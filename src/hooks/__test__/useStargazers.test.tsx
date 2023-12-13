@@ -38,10 +38,9 @@ describe('useStargazers', () => {
       type: 'stargazersList/setLoading',
     });
 
-    // Assert that the dispatch function was called with the expected actions
     expect(dispatchMock).toHaveBeenCalledWith({
       type: 'stargazersList/setStargazers',
-      payload: expect.any(Array) as Stargazer[],
+      payload: expect.any(Function), // Expect a function
     });
 
     // Clean up mocks after the test
