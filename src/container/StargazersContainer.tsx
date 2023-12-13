@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Modal, Pressable} from 'react-native';
-import {Button, Text, useTheme} from 'react-native-paper';
+import {StyleSheet, View, Modal} from 'react-native';
+import {Button, useTheme} from 'react-native-paper';
 
 import {Repository} from '../models/interface';
 import useStargazers from '../hooks/useStargazers';
@@ -14,8 +14,8 @@ import {clearStargazers} from '../store/reducers/stargazersSlice.ts';
 interface Props {}
 
 const StargazersContainer: React.FC<Props> = () => {
-  const [owner, setOwner] = useState('pagopa');
-  const [repo, setRepo] = useState('io-app');
+  const [owner, setOwner] = useState('OPCUAUniCT');
+  const [repo, setRepo] = useState('factory_ua_server');
   const [modalVisible, setModalVisible] = useState(false);
   const {t} = useTranslation();
   const theme = useTheme();
@@ -24,7 +24,7 @@ const StargazersContainer: React.FC<Props> = () => {
   const stargazersList = useSelector(
     (state: any) => state.stargazersList.value,
   );
-  const {fetchStargazers} = useStargazers();
+  const {fetchStargazers, hasMoreStargazers} = useStargazers();
 
   const handleFetchStargazers = () => {
     const repository: Repository = {
@@ -32,6 +32,16 @@ const StargazersContainer: React.FC<Props> = () => {
       name: repo,
     };
     fetchStargazers(repository);
+  };
+
+  const handleLoadMore = () => {
+    fetchStargazers(
+      {
+        owner: owner,
+        name: repo,
+      },
+      false,
+    );
   };
 
   return (
@@ -65,8 +75,18 @@ const StargazersContainer: React.FC<Props> = () => {
             ]}>
             <View style={styles.modalContent}>
               <StargazersList stargazersList={stargazersList} />
+              {hasMoreStargazers && (
+                <Button
+                  mode={'contained'}
+                  style={styles.modalButton}
+                  onPress={handleLoadMore}>
+                  {t('common:loadMore')}
+                </Button>
+              )}
+
               <Button
-                style={styles.closeButton}
+                mode={'outlined'}
+                style={styles.modalButton}
                 onPress={() => {
                   setModalVisible(!modalVisible);
                   dispatch(clearStargazers());
@@ -89,6 +109,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginBottom: 16,
+    position: 'relative',
   },
   searchButton: {
     marginTop: 16,
@@ -108,7 +129,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 5,
   },
-  closeButton: {
+  modalButton: {
     marginTop: 10,
     alignItems: 'center',
   },

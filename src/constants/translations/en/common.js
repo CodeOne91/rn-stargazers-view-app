@@ -21,4 +21,5 @@ export default {
   language: 'Language',
   credits: 'Credits',
   salvatore: 'Salvatore Mulè',
+  loadMore: 'Load more',
 };

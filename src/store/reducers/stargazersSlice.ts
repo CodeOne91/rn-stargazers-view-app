@@ -17,8 +17,11 @@ export const stargazersListSlice = createSlice({
   name: 'stargazersList',
   initialState,
   reducers: {
-    setStargazers: (state, action: PayloadAction<Stargazer[]>) => {
-      state.value = action.payload;
+    setStargazers: (
+      state,
+      action: PayloadAction<(prevStargazers: Stargazer[]) => Stargazer[]>,
+    ) => {
+      state.value = action.payload(state.value);
       state.loading = false;
       state.error = null;
     },
