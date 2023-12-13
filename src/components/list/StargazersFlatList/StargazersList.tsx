@@ -23,7 +23,7 @@ const StargazersList: React.FC<StargazersFlatListProps> = ({
         </Title>
         <List.Section>
           {stargazersList.map(item => (
-            <StargazerItem key={item.login} stargazer={item} />
+            <StargazerItem key={item.id} stargazer={item} />
           ))}
         </List.Section>
       </View>
