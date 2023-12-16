@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Modal} from 'react-native';
 import {Button, useTheme} from 'react-native-paper';
 
@@ -14,18 +14,27 @@ import {clearStargazers} from '../store/reducers/stargazersSlice.ts';
 interface Props {}
 
 const StargazersContainer: React.FC<Props> = () => {
-  const [owner, setOwner] = useState('OPCUAUniCT');
-  const [repo, setRepo] = useState('factory_ua_server');
+  // State declarations
+  const [owner, setOwner] = useState('pagopa');
+  const [repo, setRepo] = useState('io-app');
   const [modalVisible, setModalVisible] = useState(false);
+  const [isSearchButtonDisabled, setIsSearchButtonDisabled] = useState(true); // New state
+
+  // Hooks and Redux setup
   const {t} = useTranslation();
   const theme = useTheme();
   const dispatch = useDispatch();
-
   const stargazersList = useSelector(
     (state: any) => state.stargazersList.value,
   );
   const {fetchStargazers, hasMoreStargazers} = useStargazers();
 
+  // Effect to update search button disabled state based on owner and repo changes
+  useEffect(() => {
+    setIsSearchButtonDisabled(!owner || !repo);
+  }, [owner, repo]);
+
+  // Function to fetch stargazers
   const handleFetchStargazers = () => {
     const repository: Repository = {
       owner: owner,
@@ -34,6 +43,7 @@ const StargazersContainer: React.FC<Props> = () => {
     fetchStargazers(repository);
   };
 
+  // Function to handle loading more stargazers
   const handleLoadMore = () => {
     fetchStargazers(
       {
@@ -44,22 +54,28 @@ const StargazersContainer: React.FC<Props> = () => {
     );
   };
 
+  // Rendered component
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
+        {/* Owner input component */}
         <StargazersOwnerInput owner={owner} onChangeOwner={setOwner} />
+        {/* Repository input component */}
         <StargazersRepoInput repo={repo} onChangeRepo={setRepo} />
+        {/* Search button */}
         <Button
           mode="contained"
           onPress={() => {
             handleFetchStargazers();
             setModalVisible(true);
           }}
+          disabled={isSearchButtonDisabled}
           style={styles.searchButton}
           labelStyle={styles.searchButtonText}>
           {t('common:search')}
         </Button>
       </View>
+      {/* Modal for displaying stargazers list */}
       {stargazersList.length > 0 && (
         <Modal
           animationType="slide"
@@ -74,7 +90,9 @@ const StargazersContainer: React.FC<Props> = () => {
               {backgroundColor: theme.colors.background},
             ]}>
             <View style={styles.modalContent}>
+              {/* Stargazers list component */}
               <StargazersList stargazersList={stargazersList} />
+              {/* Load more button */}
               {hasMoreStargazers && (
                 <Button
                   mode={'contained'}
@@ -83,7 +101,7 @@ const StargazersContainer: React.FC<Props> = () => {
                   {t('common:loadMore')}
                 </Button>
               )}
-
+              {/* Close modal button */}
               <Button
                 mode={'outlined'}
                 style={styles.modalButton}
@@ -101,6 +119,7 @@ const StargazersContainer: React.FC<Props> = () => {
   );
 };
 
+// Styles for the component
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -135,4 +154,5 @@ const styles = StyleSheet.create({
   },
 });
 
+// Exporting the component
 export default StargazersContainer;

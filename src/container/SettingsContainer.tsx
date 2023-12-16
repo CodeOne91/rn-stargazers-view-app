@@ -17,17 +17,21 @@ import {LINKEDIN_LINK} from '../constants/socialLink';
 interface Props {}
 
 const SettingsContainer: React.FC<Props> = () => {
+  // Language translation hooks and states
   const {i18n, t} = useTranslation();
   const theme = useTheme();
   const dispatch = useDispatch();
   const [language, setLanguage] = useState(i18n.language);
 
+  // Redux state for dark mode
   const isDarkMode = useSelector((state: any) => state.theme?.isDarkMode);
 
+  // Callback to handle language change
   const handleLanguageChange = useCallback((newLanguage: string) => {
     setLanguage(newLanguage);
   }, []);
 
+  // Callback to toggle dark mode
   const toggleThemeSwitch = useCallback(
     async (val: boolean) => {
       dispatch(toggleTheme(val));
@@ -35,19 +39,25 @@ const SettingsContainer: React.FC<Props> = () => {
     [dispatch],
   );
 
+  // Callback to handle LinkedIn link press
   const handlePressLinkedin = useCallback(async () => {
     await Linking.openURL(LINKEDIN_LINK);
   }, []);
 
   return (
     <>
+      {/* Status bar with light content style */}
       <StatusBar barStyle="light-content" animated={true} />
+      {/* Main content in a scrollable view */}
       <ScrollView style={styles.scrollView}>
+        {/* Section for theme settings */}
         <List.Section>
+          {/* Subheader for theme */}
           <List.Subheader
             style={[styles.subheader, {color: theme.colors.secondary}]}>
             {t('common:theme')}
           </List.Subheader>
+          {/* Switch to toggle dark theme */}
           <List.Item
             title={t('common:darkTheme')}
             right={() => (
@@ -57,10 +67,12 @@ const SettingsContainer: React.FC<Props> = () => {
               />
             )}
           />
+          {/* Subheader for language settings */}
           <List.Subheader
             style={[styles.subheader, {color: theme.colors.secondary}]}>
             {t('common:language')}
           </List.Subheader>
+          {/* Item to open language selector modal */}
           <List.Item
             title={t('common:selectALanguage')}
             right={() => (
@@ -70,10 +82,12 @@ const SettingsContainer: React.FC<Props> = () => {
               />
             )}
           />
+          {/* Subheader for credits */}
           <List.Subheader
             style={[styles.subheader, {color: theme.colors.secondary}]}>
             {t('common:credits')}
           </List.Subheader>
+          {/* Item with LinkedIn link */}
           <TouchableOpacity onPress={handlePressLinkedin}>
             <List.Item
               title={t('common:salvatore')}
@@ -90,6 +104,7 @@ const SettingsContainer: React.FC<Props> = () => {
     </>
   );
 };
+
 const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
@@ -107,4 +122,5 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
 });
+
 export default SettingsContainer;

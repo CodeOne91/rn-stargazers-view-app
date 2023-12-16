@@ -102,7 +102,9 @@ const useStargazers = (): UseStargazersProps => {
       }
     } catch (error: any) {
       dispatch(setError(error));
-      dispatch(showErrorSnackbar(error as ErrorMessage));
+      if (error.message && error.status) {
+        dispatch(showErrorSnackbar(error as ErrorMessage));
+      }
     } finally {
     }
   };

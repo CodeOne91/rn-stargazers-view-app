@@ -16,12 +16,16 @@ import {ParamListBase, useNavigation} from '@react-navigation/native';
 import SettingsScreen from '../screens/SettingsScreen.tsx';
 import MenuButton from '../components/menu/MenuComponent.tsx';
 import {useTranslation} from 'react-i18next';
+import {useDispatch} from 'react-redux';
+import {showErrorSnackbar} from '../store/reducers/SnackbarContextSlice.ts';
+import {ErrorMessage} from '../models/interface.ts';
 const Stack = createNativeStackNavigator();
 
 const MainNavigator = () => {
   const theme = useTheme();
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   const {t} = useTranslation();
+  const dispatch = useDispatch();
   const screenOptionStyle = {
     headerStyle: {
       backgroundColor: theme.colors.background,
@@ -46,6 +50,11 @@ const MainNavigator = () => {
         navigation.navigate(HOME_SCREEN);
       } else {
         navigation.navigate(OFFLINE_SCREEN);
+        const offlineError: ErrorMessage = {
+          status: 'InternetConnection',
+          message: '',
+        };
+        dispatch(showErrorSnackbar(offlineError as ErrorMessage));
       }
     });
 
