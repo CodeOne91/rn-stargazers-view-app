@@ -15,6 +15,8 @@ export default {
     'Alcune funzionalità potrebbero essere limitate. Controlla la tua connessione.',
   retry: 'Riprova',
   error404: 'Nessun elemento trovato, prova a cambiare i parametri di ricerca',
+  errorInternetConnection: 'Nessuna connessione a internet',
+
   close: 'Chiudi',
   homeTitle: 'Stargazers Viewer',
   settingsTitle: 'Impostazioni',
