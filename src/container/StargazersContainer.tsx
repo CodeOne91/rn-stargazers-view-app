@@ -15,8 +15,8 @@ interface Props {}
 
 const StargazersContainer: React.FC<Props> = () => {
   // State declarations
-  const [owner, setOwner] = useState('pagopa');
-  const [repo, setRepo] = useState('io-app');
+  const [owner, setOwner] = useState('');
+  const [repo, setRepo] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [isSearchButtonDisabled, setIsSearchButtonDisabled] = useState(true); // New state
 
