@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {Button, Text, useTheme} from 'react-native-paper';
+import {Button, Text} from 'react-native-paper';
 import NetInfo from '@react-native-community/netinfo';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {HOME_SCREEN} from '../constants/route/route';
@@ -9,7 +9,6 @@ import {useTranslation} from 'react-i18next';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const OfflineScreen: React.FC = () => {
-  const theme = useTheme();
   const navigator = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   const {t} = useTranslation();
 
@@ -24,8 +23,7 @@ const OfflineScreen: React.FC = () => {
 
   return (
     <BasicScreenComponent>
-      <View
-        style={[styles.container, {backgroundColor: theme.colors.background}]}>
+      <View style={[styles.container]}>
         <Text style={styles.title}>{t('common:noInternetTitle')}</Text>
         <Text style={styles.subtitle}>{t('common:checkYourConnection')}</Text>
         <Button mode="contained" onPress={getNetInfo}>

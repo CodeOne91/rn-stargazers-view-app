@@ -17,7 +17,7 @@ import SettingsScreen from '../screens/SettingsScreen.tsx';
 import MenuButton from '../components/menu/MenuComponent.tsx';
 import {useTranslation} from 'react-i18next';
 import {useDispatch} from 'react-redux';
-import {showErrorSnackbar} from '../store/reducers/SnackbarContextSlice.ts';
+import {showErrorSnackbar} from '../store/reducers/snackbarContextSlice.ts';
 import {ErrorMessage} from '../models/interface.ts';
 const Stack = createNativeStackNavigator();
 

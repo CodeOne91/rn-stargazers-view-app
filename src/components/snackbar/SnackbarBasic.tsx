@@ -1,7 +1,7 @@
 import React from 'react';
 import {Snackbar} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
-import {hideSnackbar} from '../../store/reducers/SnackbarContextSlice.ts';
+import {hideSnackbar} from '../../store/reducers/snackbarContextSlice.ts';
 import {useTranslation} from 'react-i18next';
 
 // This is snackbar visible in all app in order to notify with redux important message

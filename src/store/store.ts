@@ -1,7 +1,7 @@
 import {configureStore} from '@reduxjs/toolkit';
 import stargazersListSlice from './reducers/stargazersSlice';
 import IsThemeDarkSlice from './reducers/isThemeDarkSlice.ts';
-import SnackbarContextSlice from './reducers/SnackbarContextSlice.ts';
+import SnackbarContextSlice from './reducers/snackbarContextSlice.ts';
 
 export const store = configureStore({
   reducer: {

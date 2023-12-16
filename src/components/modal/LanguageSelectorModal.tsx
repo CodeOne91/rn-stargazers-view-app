@@ -27,6 +27,7 @@ const LanguageSelectorModal: React.FC<LanguageSelectorModalProps> = ({
   const theme = useTheme();
 
   useEffect(() => {
+    // Reload language resources when the language changes
     try {
       i18n.reloadResources();
     } catch (e) {
@@ -35,14 +36,18 @@ const LanguageSelectorModal: React.FC<LanguageSelectorModalProps> = ({
   }, [language]);
 
   const openModal = () => {
+    // Open the language selection modal
     setModalVisible(true);
   };
 
   const closeModal = () => {
+    // Close the language selection modal
     setModalVisible(false);
   };
 
   const handleModalPress = (event: React.MouseEvent<View, MouseEvent>) => {
+    // Close the modal when clicking outside its content
+    // @ts-ignore
     if (event.target === modalRef.current) {
       closeModal();
     }
@@ -52,6 +57,7 @@ const LanguageSelectorModal: React.FC<LanguageSelectorModalProps> = ({
     label: string;
     value: string;
   }) => {
+    // Change the language and save it to AsyncStorage
     try {
       i18next.changeLanguage(selectedLanguage.label);
       AsyncStorage.setItem('user-language', selectedLanguage.label);
@@ -65,6 +71,7 @@ const LanguageSelectorModal: React.FC<LanguageSelectorModalProps> = ({
   return (
     <View>
       <TouchableWithoutFeedback onPress={closeModal}>
+        {/* Language selection modal */}
         <Modal
           animationType="fade"
           transparent={true}
@@ -84,6 +91,7 @@ const LanguageSelectorModal: React.FC<LanguageSelectorModalProps> = ({
                   alignItems: 'center',
                   backgroundColor: theme.colors.background,
                 }}>
+                {/* Language selection buttons */}
                 {AVAILABLE_LANGUAGES?.map(languageOption => (
                   <Button
                     key={languageOption.label}
@@ -98,6 +106,7 @@ const LanguageSelectorModal: React.FC<LanguageSelectorModalProps> = ({
           </TouchableWithoutFeedback>
         </Modal>
       </TouchableWithoutFeedback>
+      {/* Button to open the language selection modal */}
       <Button onPress={openModal}>
         {AVAILABLE_LANGUAGES.find(lng => lng.label === language)?.value}
       </Button>

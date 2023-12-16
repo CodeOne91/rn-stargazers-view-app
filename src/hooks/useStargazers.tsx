@@ -7,7 +7,7 @@ import {
   setLoading,
   setStargazers,
 } from '../store/reducers/stargazersSlice';
-import {showErrorSnackbar} from '../store/reducers/SnackbarContextSlice.ts';
+import {showErrorSnackbar} from '../store/reducers/snackbarContextSlice.ts';
 import {useState} from 'react';
 
 /**

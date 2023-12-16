@@ -8,7 +8,6 @@ jest.mock('react-native-localize', () => ({
     languageTag: 'en',
     isRTL: false,
   })),
-  // you can add other functions mock here that you are using
 }));
 
 // Other mocks

@@ -20,12 +20,12 @@ const MenuButton = () => {
 
   return (
     <Menu
-      testID="menu-component" // Add testID to the Menu component
+      testID="menu-component"
       visible={visible}
       onDismiss={closeMenu}
       anchor={
         <TouchableOpacity
-          testID="menu-button" // Add testID to the TouchableOpacity
+          testID="menu-button"
           style={styles.menuButton}
           onPress={openMenu}>
           <MaterialIcons
@@ -36,7 +36,7 @@ const MenuButton = () => {
         </TouchableOpacity>
       }>
       <Menu.Item
-        testID="menu-item" // Add testID to the Menu.Item
+        testID="menu-item"
         title={t('common:settings')}
         leadingIcon={() => (
           <MaterialIcons

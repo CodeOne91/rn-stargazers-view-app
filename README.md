@@ -1,79 +1,215 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Project Documentation
 
-# Getting Started
+## Introduction
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+The project is a simple mobile application developed in React Native that leverages GitHub APIs to display users who have starred a particular repository.
 
-## Step 1: Start the Metro Server
+## Getting Started
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+The app has been developed using `react-native-cli` and can be tested on both Android and iOS devices/emulators.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+### Steps to Get Started:
 
-```bash
-# using npm
-npm start
+1. **Clone the Project:**
+   - Open a terminal and run the following command to clone the project:
+     ```bash
+     git clone [repository_url]
+     ```
+   - Replace `[repository_url]` with the actual URL of the project repository.
 
-# OR using Yarn
-yarn start
-```
+2. **Install Dependencies:**
+   - Navigate to the project directory:
+     ```bash
+     cd rn-stargazers-view-app
+     ```
+   - Run the following command to install project dependencies:
+     ```bash
+     npm install
+     ```
 
-## Step 2: Start your Application
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+3. **For Android:**
+   - Make sure you have Android Studio installed and properly configured.
+   - Open a terminal and navigate to the project directory.
+   - Run the following command to build and run the app on an Android emulator or connected device:
+     ```bash
+     npx react-native run-android
+     ```
 
-### For Android
 
-```bash
-# using npm
-npm run android
+4. **Install iOS Dependencies (For iOS):**
+   - Make sure you have Xcode installed and properly configured on your macOS.
+   - Navigate to the project directory.
+   - Run the following command to install iOS dependencies:
+     ```bash
+     cd ios && bundle install && pod install && cd ..
+     ```
 
-# OR using Yarn
-yarn android
-```
+5. **For iOS:**
+   - Make sure you have Xcode installed and properly configured on your macOS.
+   - Navigate to the project directory.
+   - Run the following command to build and run the app on an iOS simulator or connected device:
+     ```bash
+     npx react-native run-ios
+     ```
 
-### For iOS
+   **Note:** If you encounter any issues during the setup or build process, refer to official documentation or open an issue.
 
-```bash
-# using npm
-npm run ios
 
-# OR using Yarn
-yarn ios
-```
+## Project Structure
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+The project follows the following structure:
+<details>
+  <summary style="cursor: pointer; font-weight: bold;">Project Structure</summary>
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+- **assets/**
+   - logo/
+      - linkedin-logo.png
 
-## Step 3: Modifying your App
+- **components/**
+   - input/
+      - ( Reusable input components)
+   - list/
+      - ( Reusable list components)
+   - menu/
+      - ( Reusable menu components)
+   - modal/
+      - ( Reusable modal components)
+   - screen/
+      - ( Screens representing different app pages)
+   - snackbar/
+      - ( Reusable snackbar components)
+   - __test__/
+      - ( Test cases for components)
+   - translator/
+      - ( Language translation components)
 
-Now that you have successfully run the app, let's modify it.
+- **constants/**
+   - api/
+      - ( API-related constants)
+   - route/
+      - ( Navigation route constants)
+   - socialLink.js
+      - ( Constants related to social links)
+   - translations/
+      - ( Translation-related constants)
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+- **container/**
+   - ( Containers for managing state logic)
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+- **hooks/**
+   - ( Custom React hooks)
 
-## Congratulations! :tada:
+- **models/**
+   - ( Data models)
 
-You've successfully run and modified your React Native App. :partying_face:
+- **navigation/**
+   - ( Navigation configuration)
 
-### Now what?
+- **screens/**
+   - ( Main app screens)
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+- **services/**
+   - ( External services such as API calls)
 
-# Troubleshooting
+- **store/**
+   - reducers/
+      - ( Redux reducers)
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+- **style/**
+   - theme/
+      - ( App theme)
+</details>
 
-# Learn More
 
-To learn more about React Native, take a look at the following resources:
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+## Dependencies
+
+The project utilizes the following dependencies:
+
+- [axios](https://github.com/axios/axios)
+- [redux-toolkit](https://redux-toolkit.js.org/), [react-redux](https://react-redux.js.org/)
+- [react-native-paper](https://callstack.github.io/react-native-paper/)
+- [async-storage](https://react-native-async-storage.github.io/async-storage/)
+- [i18next](https://www.i18next.com/), [react-i18next](https://react.i18next.com/), [react-native-localize](https://github.com/react-native-localize/react-native-localize)
+- [react-native-community/netinfo](https://github.com/react-native-netinfo/react-native-netinfo)
+- [react-navigation](https://reactnavigation.org/)
+
+
+
+## Usage Examples
+
+The app includes three screens: Home, Settings, and Offline.
+
+- **Home Screen:**
+   - Users can input the owner's GitHub account name and repository name.
+   - If the repository exists, a modal displays a list of users who have starred it, otherwise, a message suggests verifying the input parameters.
+   - Users can load more if available; otherwise.
+
+- **Settings Screen:**
+   - Users can select the language, enable dark theme, and view app credits.
+   - Choices are saved as preferences.
+
+- **Offline Page:**
+   - In case of no internet connection, users see a page suggesting checking their internet connection.
+
+# Main Elements
+
+## Interface
+The primary interface elements have been implemented in the `models/` directory. Three key interfaces have been considered:
+
+- **Stargazer:** Represents a user and their information obtained from the GitHub starred response.
+- **Repository:** Represents the search parameter.
+- **ErrorMessage:** Manages response errors.
+
+## UI
+The project utilizes `react-native-paper` to ensure a consistent theme throughout the application. This library provides ready-to-use components and facilitates theme management within the app.
+
+## Components
+Reusable components with basic logic have been implemented. The main components are located in the `list/` directory, representing the stargazers list. Menu components are used to display the top-right menu for navigation to the settings page, and a snackbar component handles notifications for both normal and error messages.
+
+## Container
+The `container` directory contains TypeScript (`.tsx`) files responsible for managing interactions between components and application logic.
+
+### Custom Hook
+The `useStargazers` custom hook is designed to handle interactions between components and API requests. Its role includes managing the fetching of stargazers, loading more if necessary, and interacting with the store.
+
+### Store
+`redux-toolkit` is employed to ensure data consistency in the application. Three main reducers have been created for stargazers, dark theme, and the context of the snackbar.
+
+### Services
+The application utilizes `axios` for managing API requests and responses, as specified in the `services/api.ts` file. The API configuration includes instance creation and the implementation of interceptors to manage requests and responses. In this project, responses are intercepted to handle error responses.
+
+
+###
+
+## API Documentation
+
+The application interacts with the GitHub API. Refer to the [GitHub API documentation](https://docs.github.com/en/rest/activity/starring?apiVersion=2022-11-28#list-stargazers) for details on endpoints, request and response formats, and params.
+
+## Troubleshooting and FAQ
+
+
+## Testing
+
+
+### MenuButton Component Snapshot Test
+
+To maintain the visual correctness of the `MenuButton` component, a snapshot test has been implemented using [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-native-testing-library/intro/). Snapshot testing captures a serialized version of the component's output and compares it against a stored reference snapshot.
+
+### StargazerItem Component Snapshot Test
+
+A test has been implemented for the `StargazerItem` component to ensure it renders correctly with a given set of props.
+
+
+### useStargazers Hook Test
+
+The `useStargazers` hook is tested to ensure that it correctly dispatches actions based on a response from the GitHub API.
+
+
+
+## Changelog
+
+V1
+

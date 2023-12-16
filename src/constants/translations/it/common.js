@@ -1,5 +1,5 @@
 export default {
-  appName: 'Star Viewer',
+  appName: 'Stargazers Viewer',
   selectALanguage: 'Seleziona lingua',
   theme: 'Tema',
   darkTheme: 'Tema scuro',
@@ -15,8 +15,12 @@ export default {
     'Alcune funzionalità potrebbero essere limitate. Controlla la tua connessione.',
   retry: 'Riprova',
   error404: 'Nessun elemento trovato, prova a cambiare i parametri di ricerca',
+  error304: 'Prova a cambiare i campi',
+  error400: 'Richiesta non andata a buon fine',
+  error401: 'Non sei autorizzato',
+  error403: 'Richiesta rifiutata',
+  error422: 'I campi non sono corretti',
   errorInternetConnection: 'Nessuna connessione a internet',
-
   close: 'Chiudi',
   homeTitle: 'Stargazers Viewer',
   settingsTitle: 'Impostazioni',
