@@ -5,7 +5,7 @@ import {useTheme} from 'react-native-paper';
 // Mock the useTheme hook otherwise error appears
 (useTheme as jest.Mock).mockReturnValue({
   colors: {
-    primary: 'mockPrimaryColor',
+    primary: 'white',
   },
 });
 // Cleanup after each test

@@ -20,7 +20,7 @@ describe('MenuButton snapshot', () => {
     // Mock the useTheme hook otherwise error appear
     (useTheme as jest.Mock).mockReturnValue({
       colors: {
-        primary: 'mockPrimaryColor',
+        primary: 'white',
       },
     });
 

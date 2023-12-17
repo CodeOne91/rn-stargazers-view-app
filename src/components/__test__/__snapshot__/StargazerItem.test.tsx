@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {describe, expect, it} from '@jest/globals';
-import StargazerItem from './StargazersItem.tsx';
+import StargazerItem from '../../list/StargazersFlatList/StargazersItem.tsx';
 
 describe('StargazerItem', () => {
   it('renders correctly', () => {
