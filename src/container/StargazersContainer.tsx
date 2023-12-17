@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Modal} from 'react-native';
+import {StyleSheet, View, Modal, ActivityIndicator} from 'react-native';
 import {Button, useTheme} from 'react-native-paper';
 
 import {Repository} from '../models/interface';
@@ -19,6 +19,7 @@ const StargazersContainer: React.FC<Props> = () => {
   const [repo, setRepo] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [isSearchButtonDisabled, setIsSearchButtonDisabled] = useState(true); // New state
+  const [isLoadingMore, setIsLoadingMore] = useState(false); // New state
 
   // Hooks and Redux setup
   const {t} = useTranslation();
@@ -45,13 +46,15 @@ const StargazersContainer: React.FC<Props> = () => {
 
   // Function to handle loading more stargazers
   const handleLoadMore = () => {
+    setIsLoadingMore(true);
+
     fetchStargazers(
       {
         owner: owner,
         name: repo,
       },
       false,
-    );
+    ).finally(() => setIsLoadingMore(false));
   };
 
   // Rendered component
@@ -95,11 +98,13 @@ const StargazersContainer: React.FC<Props> = () => {
               {/* Load more button */}
               {hasMoreStargazers && (
                 <Button
+                  loading={isLoadingMore}
                   mode={'contained'}
                   style={styles.modalButton}
                   onPress={handleLoadMore}>
                   {t('common:loadMore')}
                 </Button>
+                // )
               )}
               {/* Close modal button */}
               <Button
