@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Modal, ActivityIndicator} from 'react-native';
+import {StyleSheet, View, Modal} from 'react-native';
 import {Button, useTheme} from 'react-native-paper';
-
 import {Repository} from '../models/interface';
 import useStargazers from '../hooks/useStargazers';
 import {useDispatch, useSelector} from 'react-redux';
