@@ -6,10 +6,6 @@ import MenuButton from '../../menu/MenuComponent.tsx';
 
 // Mock the useNavigation and useTheme hooks
 jest.mock('@react-navigation/native');
-jest.mock('react-native-paper', () => ({
-  ...jest.requireActual('react-native-paper'),
-  useTheme: jest.fn(),
-}));
 
 describe('MenuButton snapshot', () => {
   it('renders correctly', () => {

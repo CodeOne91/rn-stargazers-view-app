@@ -198,6 +198,9 @@ The application interacts with the GitHub API. Refer to the [GitHub API document
 
 To maintain the visual correctness of the `MenuButton` component, a snapshot test has been implemented using [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-native-testing-library/intro/). Snapshot testing captures a serialized version of the component's output and compares it against a stored reference snapshot.
 
+### StargazersOwnerInput Component Test
+
+Tests verify both the rendering and functional aspects of the StargazersOwnerInput component, ensuring that it renders correctly and correctly triggers the onChangeOwner prop when the input text changes.
 ### StargazerItem Component Snapshot Test
 
 A test has been implemented for the `StargazerItem` component to ensure it renders correctly with a given set of props.

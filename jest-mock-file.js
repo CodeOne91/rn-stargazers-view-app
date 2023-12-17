@@ -15,4 +15,9 @@ jest.mock('react-native-paper');
 jest.mock('@react-native-community/netinfo', () => mockRNCNetInfo);
 jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage);
 
+jest.mock('react-native-paper', () => ({
+  ...jest.requireActual('react-native-paper'),
+  useTheme: jest.fn(),
+}));
+
 export {};

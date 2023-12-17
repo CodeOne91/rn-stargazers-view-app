@@ -17,6 +17,7 @@ const StargazersOwnerInput: React.FC<StargazersOwnerInputProps> = ({
 
   return (
     <TextInput
+      testID={'OwnerInput'}
       label={t('common:owner')}
       mode={'outlined'}
       placeholder={t('common:ownerPlaceholder')}
